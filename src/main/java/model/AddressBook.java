@@ -1,26 +1,20 @@
 package model;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import helper.InputValidation;
 
 public class AddressBook {
 	
-	public static final String DEFAULT_NAME = "default";
-	
 	private String name;
 	private Set<Contact> contacts;
 	
-	public AddressBook(){
-		this.contacts = new HashSet<>();
-		this.setName(DEFAULT_NAME);
+	public AddressBook(String addressBookName){
+		this.setName(addressBookName);
 	}
 	
-	public AddressBook(Set<Contact> contacts){
-		this();
-		this.contacts.addAll(contacts);
-	}
 	
 	public AddressBook(String name, Set<Contact> contacts){
 		this.contacts = new HashSet<>(contacts);
@@ -32,6 +26,10 @@ public class AddressBook {
 		return this;
 	}
 	
+	public boolean removeContact(Contact contact){
+		return this.getContacts().remove(contact);
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -41,6 +39,9 @@ public class AddressBook {
 	}
 	
 	public Set<Contact> getContacts() {
+		if(contacts == null)
+			contacts = new HashSet<>();
+		
 		return contacts;
 	}
 	
@@ -59,7 +60,16 @@ public class AddressBook {
 	
 	@Override
 	public int hashCode(){
-		return this.name.hashCode() + this.contacts.hashCode() + this.contacts.size() * 31;
+		return this.name.hashCode() + this.getContacts().hashCode() + this.name.hashCode() * this.getContacts().size() * 31;
+	}
+
+
+	public boolean removeContact(String contactName) {
+		Optional<Contact> contact = this.getContacts().stream()
+									.filter(c -> c.getName().equals(InputValidation.validString(contactName)))
+									.findFirst();
+		
+		return this.removeContact(contact.orElse(null));
 	}
 	
 }

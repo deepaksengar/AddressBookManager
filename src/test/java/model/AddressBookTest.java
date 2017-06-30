@@ -5,16 +5,18 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
+import helper.InputValidation;
 import model.AddressBook;
 import model.Contact;
 
 public class AddressBookTest {
 	
 	AddressBook addressBook;
+	String addressBookName = InputValidation.validString("default");
 	
 	@Before
 	public void init(){
-		addressBook = new AddressBook();
+		addressBook = new AddressBook(addressBookName);
 	}
 	
 	@Test
