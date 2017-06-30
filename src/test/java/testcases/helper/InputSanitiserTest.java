@@ -1,7 +1,11 @@
 package testcases.helper;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import org.junit.Test;
+
 import helper.InputSanitiser;
 
 public class InputSanitiserTest {
@@ -31,6 +35,12 @@ public class InputSanitiserTest {
 	}
 	
 	@Test
+	public void testValidPhoneNumberWith3Digits() throws Exception {
+		assertEquals("Phone number should be valid and return sanitised value.","000", 
+				InputSanitiser.validPhoneNumber("000"));
+	}
+	
+	@Test
 	public void testValidPhoneNumberWithHyphen() throws Exception {
 		assertEquals("Phone number should be valid and return sanitised value.","08828282", 
 				InputSanitiser.validPhoneNumber(" 088-28-282"));
@@ -49,9 +59,9 @@ public class InputSanitiserTest {
 	}
 	
 	@Test
-	public void testInValidPhoneNumberWithOnly3Digits(){
+	public void testInValidPhoneNumberWithOnly2Digits(){
 		try{
-				InputSanitiser.validPhoneNumber("  2 - 8 - 2");
+				InputSanitiser.validPhoneNumber("  2 - 8 - ");
 				fail("Should throw IllegalArgument Exception for invalid phone number with only 3 Digits."
 						+ " Valid Phone should have atleast 6 digits.");
 		} catch (Exception ex){

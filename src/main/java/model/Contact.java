@@ -7,6 +7,10 @@ public class Contact {
 	private String name;
 	private String phoneNumber;
 	
+	public Contact(){
+		
+	}
+	
 	public Contact(String name, String phoneNumber){
 		this.setName(name);
 		this.setPhoneNumber(phoneNumber);
@@ -38,10 +42,10 @@ public class Contact {
 		if(!(obj instanceof Contact))
 			return false;
 		
-		Contact newContact = (Contact) obj;
-		
-		if(this == newContact)
+		if(this == obj)
 			return true;
+		
+		Contact newContact = (Contact) obj;
 		
 		if(this.getName().equals(newContact.getName()) && this.getPhoneNumber().equals(newContact.getPhoneNumber())){
 			return true;
@@ -53,7 +57,13 @@ public class Contact {
 	@Override
 	public int hashCode(){
 		return this.getName().hashCode() + this.getPhoneNumber().hashCode();
-		
+	}
+	
+	@Override
+	public String toString(){
+		StringBuilder sb = new StringBuilder();
+		sb.append("Name: ").append(this.name).append(" , PhoneNumber: ").append(this.phoneNumber);
+		return sb.toString();
 	}
 	
 

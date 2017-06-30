@@ -1,6 +1,5 @@
 package helper;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class InputSanitiser {
@@ -22,7 +21,7 @@ public class InputSanitiser {
 	        throw new IllegalArgumentException("PhoneNumber is not present.");
 	    }
 		
-		String phoneNumberRegex = "^\\+?[0-9 -]{7,20}$";
+		String phoneNumberRegex = "^\\+?[0-9 -]{3,20}$";
 		
 		input = input.trim();
 		
@@ -31,11 +30,11 @@ public class InputSanitiser {
         
         input = input.trim().replaceAll("[- ]+","");
         
-        if(!matchesPattern || input.length() < 7){
+        if(!matchesPattern || input.length() < 3){
         	throw new IllegalArgumentException("PhoneNumber is not valid.");
         }
         
         return input;
 	}
-
+	
 }
