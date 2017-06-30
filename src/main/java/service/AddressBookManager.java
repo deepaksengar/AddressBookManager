@@ -23,7 +23,7 @@ public class AddressBookManager {
 	 */
 	public AddressBook getAddressBook(String name){
 		Optional<AddressBook> addressBook = this.getAddressBooks().stream().filter(a-> a.getName().equals(InputValidation.validString(name)))
-												.findFirst();
+												.findAny();
 		return addressBook.orElse(null);
 	}
 	
@@ -81,5 +81,32 @@ public class AddressBookManager {
 		}
 		
 		return addressBook.removeContact(contactName);
+	}
+
+	public Contact getContact(String name) {
+		String contactName = InputValidation.validString(name);
+		Contact contact = findContact(mergeAllAddressBook(), contactName);
+		if(contact == null){
+			throw new RuntimeException("No contact exist with name: " + name);
+		}
+		return contact;
+	}
+	
+	private Contact findContact(Set<Contact> contactLists, String name){
+		Optional<Contact> contact = contactLists.stream().filter(val -> val.getName().equals(name)).findFirst();
+		return contact.orElse(null);
+	}
+
+	public Contact getContact(String addressBookName, String contactName) {
+		AddressBook addressBook = getAddressBook(addressBookName);
+		if(addressBook == null){
+			throw new RuntimeException("No AddressBook exists for: " + addressBookName);
+		}
+		Contact contact = findContact(addressBook.getContacts(), contactName);
+		
+		if(contact == null){
+			throw new RuntimeException("No contact exist with name: " + contactName);
+		}
+		return contact;
 	}
 }

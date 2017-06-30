@@ -2,7 +2,7 @@ package model;
 
 import helper.InputValidation;
 
-public class Contact {
+public class Contact implements Comparable<Contact>{
 	
 	private String name;
 	private String phoneNumber;
@@ -17,7 +17,11 @@ public class Contact {
 	}
 	
 	public void setName(String name) {
-		this.name = InputValidation.validString(name);
+		try{
+			this.name = InputValidation.validString(name);
+		} catch (IllegalArgumentException ex){
+			throw new IllegalArgumentException("Contact Name is not valid. " + ex.getMessage());
+		}
 	}
 	
 	public String getPhoneNumber() {
@@ -52,7 +56,7 @@ public class Contact {
 	
 	@Override
 	public int hashCode(){
-		return this.getName().hashCode() + this.getPhoneNumber().hashCode();
+		return this.getName().hashCode() + this.getPhoneNumber().hashCode() * 31;
 	}
 	
 	@Override
@@ -60,6 +64,11 @@ public class Contact {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Name: ").append(this.name).append(" , PhoneNumber: ").append(this.phoneNumber);
 		return sb.toString();
+	}
+
+	@Override
+	public int compareTo(Contact other) {
+		return this.name.compareTo(other.getName());
 	}
 	
 

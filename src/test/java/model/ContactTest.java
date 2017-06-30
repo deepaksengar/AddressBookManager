@@ -25,7 +25,7 @@ public class ContactTest {
 			fail("Empty Name should not create new contact.");
 		} catch (Exception ex){
 			assert(ex instanceof IllegalArgumentException);
-			assertEquals("Error Message.","String value is not present.", 
+			assertEquals("Error Message.","Contact Name is not valid. String value is not present.", 
 					ex.getMessage());
 		}
 	}

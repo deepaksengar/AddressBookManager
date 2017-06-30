@@ -25,6 +25,14 @@ public class AddressBookManagerTest {
 	}
 	
 	@Test
+	public void addMultipleContacts(){
+		addContact();
+		addressBookManager.addContact("emergency", "000");
+		assertEquals("Should have only one address book", 1, addressBookManager.getAddressBooks().size());
+		assertEquals("Default address book should have 2 contacts",2,addressBookManager.getAddressBooks().stream().findAny().get().getContacts().size());
+	}
+	
+	@Test
 	public void testInitialNoAddressBook(){
 		assertTrue("Initially AddressBook Manager will not have any address book.",addressBookManager.getAddressBooks().size() == 0);
 	}
@@ -86,5 +94,20 @@ public class AddressBookManagerTest {
 					addressBookManager.mergeAllAddressBook().size() == 1);
 		
 	}
-
+	
+	@Test
+	public void testRemoveContactsFromAllAddressBooksAndMerge(){
+		addContactInDifferentAddressBook();
+		AddressBook addressBook = addressBookManager.getAddressBooks().iterator().next();
+		assertEquals("AddressBook - MyNewAddressBook will have one contact.",1,addressBook.getContacts().size());
+		
+		addressBookManager.removeContact("MyNewAddressBook","frodo");
+		
+		addContact();
+		addressBookManager.removeContact("frodo");
+		
+		assertTrue("Address Book merge will return 0 contact.",
+					addressBookManager.mergeAllAddressBook().size() == 0);
+		
+	}
 }
