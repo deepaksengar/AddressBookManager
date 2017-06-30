@@ -2,7 +2,7 @@ package helper;
 
 import java.util.regex.Pattern;
 
-public class InputSanitiser {
+public class InputValidation {
 	
 	/*
 	 * returns Trimmed String input with making first letter capital.

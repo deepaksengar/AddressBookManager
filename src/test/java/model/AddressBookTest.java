@@ -1,4 +1,4 @@
-package testcases.model;
+package model;
 
 import static org.junit.Assert.assertEquals;
 

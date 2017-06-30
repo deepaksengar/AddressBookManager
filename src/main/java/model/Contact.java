@@ -1,6 +1,6 @@
 package model;
 
-import helper.InputSanitiser;
+import helper.InputValidation;
 
 public class Contact {
 	
@@ -21,7 +21,7 @@ public class Contact {
 	}
 	
 	public void setName(String name) {
-		this.name = InputSanitiser.validString(name);
+		this.name = InputValidation.validString(name);
 	}
 	
 	public String getPhoneNumber() {
@@ -29,7 +29,7 @@ public class Contact {
 	}
 	
 	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = InputSanitiser.validPhoneNumber(phoneNumber);
+		this.phoneNumber = InputValidation.validPhoneNumber(phoneNumber);
 	}
 	
 	/*

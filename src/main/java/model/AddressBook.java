@@ -3,11 +3,11 @@ package model;
 import java.util.HashSet;
 import java.util.Set;
 
-import helper.InputSanitiser;
+import helper.InputValidation;
 
 public class AddressBook {
 	
-	private final String DEFAULT_NAME = "default";
+	public static final String DEFAULT_NAME = "default";
 	
 	private String name;
 	private Set<Contact> contacts;
@@ -37,7 +37,7 @@ public class AddressBook {
 	}
 	
 	public void setName(String name) {
-		this.name = InputSanitiser.validString(name);
+		this.name = InputValidation.validString(name);
 	}
 	
 	public Set<Contact> getContacts() {
