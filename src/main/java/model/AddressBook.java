@@ -50,13 +50,13 @@ public class AddressBook {
 	}
 	
 	@Override
-    public boolean equals(Object obj) {
-        if (obj instanceof AddressBook){
-            return (this.name.equals(((AddressBook) obj).getName())); 
-        }            		
-        else
-            return false;
-    }
+	public boolean equals(Object obj) {
+	    if (obj instanceof AddressBook){
+	        return (this.name.equals(((AddressBook) obj).getName())); 
+	    }            		
+	    else
+	        return false;
+	}
 	
 	@Override
 	public int hashCode(){
